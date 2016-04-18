@@ -1,0 +1,88 @@
+\documentclass [a4paper,12pt]{article}
+\usepackage{times}
+\usepackage[english]{babel}
+\usepackage[toc,page]{appendix}
+
+% Format the chapter headings
+\usepackage[T1]{fontenc}
+\usepackage{titlesec, blindtext, color}
+
+% Basic A4 paper settings with extra space
+\usepackage[a4paper]{geometry}
+\usepackage{a4wide}
+
+% Input encoding as UTF8
+\usepackage[utf8]{inputenc}
+
+% For figures
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{wrapfig}
+
+% For math formulas
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+
+% For euro sign
+\usepackage{eurosym}
+%diametersign
+\usepackage{wasysym}
+
+% For lists
+\usepackage{tabto}
+\usepackage{enumitem}
+
+% Title and authors
+\title{Plan van Aanpak}
+\author{Jens Voortman \and Ruben Visser \and Vasco de Bruijn}
+
+% Setting paragraph indents and newlines
+\setlength\parindent{0pt}
+\setlength{\parskip}{\baselineskip}
+
+\begin{document}
+
+\begin{titlepage}
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+\center
+
+\HRule \\[0.4cm]
+{ \huge \bfseries Plan van Aanpak}\\ % Title of your document
+\HRule \\[0.5cm]
+
+\textsc{\large Exoskeleton Monitoring System}\\[13cm] % Minor heading such as course title
+
+\begin{minipage}{0.4\textwidth}
+\begin{flushleft} \large
+\emph{Author:}\\
+Jens Voortman\\
+Ruben Visser\\
+Vasco de Bruijn
+\end{flushleft}
+\end{minipage}
+~
+\begin{minipage}{0.4\textwidth}
+\begin{flushright} \large
+\includegraphics{logo_black}
+\end{flushright}
+\end{minipage}\\[2cm]
+
+{\large \today}\\ % Date, change the \today to a set date if you want to be precise
+
+\vfill % Fill the rest of the page with whitespace
+\end{titlepage}
+
+% Create table of contents
+\pagebreak
+\tableofcontents
+\pagebreak
+
+\input{chapter-1}
+
+\begin{appendix}
+\bibliography{biblio}
+\end{appendix}
+\end{document}
