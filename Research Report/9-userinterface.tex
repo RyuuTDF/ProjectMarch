@@ -2,11 +2,13 @@
 \subsection{Description}
 When the sensor data has arrived at the remote PC, the data has to be read out. The data should be at least be output to a console. If possible due to time constraints, the data will be more visualised.
 \subsubsection{CUI}
-The CUI (Console User Interface) is the most basic way the data will be output. All the sensor data will be output to the control with corresponding label. In order to make the CUI readable, it will be possible to filter the data and control the refresh rate of the data.
+The CUI (Console User Interface) is the most basic way the data will be output. All the sensor data will be output to the control with corresponding label. The CUI will automatically be updated when new data arrives. 
 \begin{figure}[H]
 	\includegraphics{MockupCUI}
+	\caption{A mockup with a possible look of the CUI} 
 \end{figure} 
 \subsubsection{GUI}
+The GUI (Graphic User Interface) consists of two parts. One part shows a dashboard with the most imporant sensor data visualised. The other part is a concise list with all sensor data.  
 \subsection{Framework}
 In order to choose a language, there are two important factors in this project which have to be taken in account. Firstly, the framework should have a rich support of visualising data. Secondly, the framework must be able to support 3D rendering. Keeping this in mind, the options of languages are narrowed down to C/C++, Java \& Python because these are known to have a rich selection of libraries which support 3D rendering and data visualisation. In addition, since SimuLink is a MatLab module, using MatLab as framework is also an option. 
 \subsubsection{MatLab}
