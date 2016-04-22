@@ -1,9 +1,16 @@
 \section{Problem definition \& analysis}
-\subsection{Problem Definition}
-Het dream team ``Project MARCH'' ontwerpt en bouwt naar aanloop voor de Cybathlon 2016 in Zurich een exoskelet voor dwarslaesiepatiënten. Dit exoskelet bevat vele sensoren die data verzamelen over hun omgeving en worden verwerkt in een model opgezet in Simulink.
+\subsection{Problem definition}
+In 2015, the ``Moving Bird Foundation'' was founded. As part of the foundation, the dream team ``Project MARCH'' was created. The goal of this dream team is designing and building an exoskeleton for paraplegic people, to participate in the `Powered Exoskeleton Race'-discipline of the 2016 Cybathlon in Zurich\footnote{\url{http://www.cybathlon.ethz.ch/en/}}. The Cybathlon is the first `Olympics' for disabled athletes using bionic assistive technology.\\ 
+The exoskeleton that is being designed has many sensors, which acquire data from their surroundings. Project MARCH wishes to have a system, which allows monitoring and visualization of all vital sensor data.
+
+\subsection{Problem Analysis}
+and are further processed in a model in Simulink. This model is compiled, so it can run as a stand-alone executable.\\
+The team will therefore be tasked to design and implement a system which makes the monitoring of all the sensors of the exoskeleton in a visual possible.
+
+As it stands now only the raw sensor data can be extracted which is of no use since they are unitless. Such a monitoring system would require the selection of an arbitrary sensor and its monitoring view (e.g. graph, text field, toggle). Furthermore, some sensors are used to measure the location and orientation of parts of the exoskeleton in 3D-space. These parts and their orientation should be visualized in the monitoring system in 3D.
+
+
 
 Ons team gaat zich richten op het bouwen van een systeem dat deze sensordata kan monitoren en visualiseren. Dit losstaande systeem zal door gebruik te maken van draadloze communicatie inhaken op het bestaande systeem en de mogelijkheid bieden om deze monitoring en visualisatie in een interface te tonen zonder met kabels verbonden te zijn met het exoskelet.
 
 De te ontwikkelen applicatie gaat een intuïtieve en gebruiksvriendelijke interface bieden om ruwe sensordata te kunnen weergeven en visualiseren. Daarnaast kan de applicatie de locatie en oriëntatie van verschillende onderdelen van het exoskelet ten opzichte van elkaar bepalen in 3D-ruimte en dat grafisch weergeven in de interface.
-
-\subsection{Problem Analysis}
