@@ -23,9 +23,6 @@ The requirements state that data visualisation has a higher priority than 3D-ren
 \end{itemize}
 In the event that it proves to be impossible or undesirable to connect wireless directly using Matlab, there are two alternatives to consider. The first one is to create a receiver which listens on the port and can convert the data to a format which is readable by Matlab. The other option is to create the GUI in HTML as a web-page and put a web-socket in the page to get the data. This implementation is very user friendly, as the only required software for the client is a web-browser. In addition, this makes it very easy for multiple people to use the monitoring system since the exoskeleton will broadcast over the wi-fi instead of sending the data directly to another client. By using this method, the options for the framework are limited to JavaScript and its libraries. In addition, running code in a browser tends to be less powerful than running the code in a stand-alone application. This results in a lower update frequency and fewer options for data visualising.
 
-%TODO standalone
-%TODO web based html websocket -broadcasten makkelijk
-%TODO updated freq webinterface
 \subsection{3D-Rendering}
 Because of the fact that the 3d-rendering has shifted to a lower priority, less effort has been expended in researching suitable frameworks for rendering. Still, a small list have been compiled of some rendering frameworks which are simple to use for each of the narrowed down languages.
 \begin{itemize}

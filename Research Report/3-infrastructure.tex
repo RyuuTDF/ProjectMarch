@@ -2,18 +2,18 @@
 \subsection{EtherCat}
 
 \subsection{Output Sensors}
-In order to monitor MARCH, it contains several sensors. Each sensor corresponds with a certain part of the exoskeleton and a certain type of measurement. The joints of MARCH that require monitoring are the hip joints, the knee joints and the ankle joints . MARCH contains  types of sensors:
+In order to monitor MARCH, it contains several sensors. Each sensor corresponds with a certain part of the exoskeleton and a certain type of measurement. The joints of MARCH that require monitoring are the hip joints, the knee joints and the ankle joints . MARCH contains five types of sensors:
 \subsubsection{IMU}
 An inertial measurement unit (IMU) is a device that measures and reports a craft's velocity, orientation, and gravitational forces. Each joint of MARCH contains an IMU. Together those IMU's are used to keep track of the position as well as the movement of the legs. The IMU's are also used to calculate the center of mass. 
 \subsubsection{Proximity sensors}
 Proximity sensors are devices used to measure the distance based on the speed of light/sound. The eight proximity sensors are situated on the feet and are for range feedback. They are situated as such: two at the bottom (front and back of the foot) and the other two on the edges towards the anterior and posterior coronal plane on the soles of the feet (again front and back). 
 
 \subsubsection{Encoders}
-An encoder is a device that measures angular position or motion of a shaft or axle. MARCH contains in total 12+4 Rotary Encoders in all of the joints and +6 in each motor. Each joint has one Torque and one Angle encoder, while each Foot-Joint contains 2 more for the Ankle-AFE and AAA. Each motor has only a Torque encoder.
+An encoder is a device that measures angular position or motion of a shaft or axle. MARCH contains in total 16 Rotary Encoders in each joints and 6 in each motor. Each joint has one Torque and one Angle encoder, while each Foot-Joint contains 2 more for the Ankle-AFE and AAA. Each motor has only a Torque encoder.
 \subsubsection{Range Finders}
-The six range finders are situated on the two shanks and are for range feedback. They work by using echolocation.
+The six range finders are situated on the two shanks and are for range feedback. While the proximity sensors are used to prevent the feet from hitting small close objects, the Range Finders are used on a larger scale to get sense of the environment. They work by using echolocation.
 \subsubsection{Force/torque sensors}
-The four force/torque sensors are situated on the bottom of the feet.
+The four force/torque sensors are situated on the bottom of the feet. The sensors are based on an array of multiple regular 3-axis sensors. By knowing in which way each sensor deforms, the torque acting on the whole sensor can be calculated. These sensors provide 6 degrees of freedom force and torque measurement.
 
 \begin{table}[]
 	\centering
