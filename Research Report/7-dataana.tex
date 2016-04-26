@@ -14,4 +14,4 @@ If a sensor sends it's data to the master, the corresponding `Sensor data'-value
 The maximum data size for a UDP-packet in Matlab is `64k' or 65,536 bytes. The size of a double-value is 64 bits. Currently the exoskeleton has 47 sensors. To show that the matrix is scalable, let's take an example in which the exoskeleton has been upgraded to 100 sensors and there has been defined an extra column. The total data size will be $(100*5*64) = 32000$ bits $= 4000$ bytes which is still more than 16 times lower than the size limit. 
 
 \subsection{Converting Raw Data}
-%TODO Correcte weergave data vs snel weergave data
+The sensor data which is received from the sensors is unitless. Therefore, the data has to be converted to the proper unit. This is why the column 'Sensor type ' was defined in the data matrix. Because of this, there is a separate method of converting data for each different type of sensor. 
