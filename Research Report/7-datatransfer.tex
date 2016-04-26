@@ -39,10 +39,3 @@ Also this solution comprises of a data provider in Simulink running on the exosk
 The Standalone Model with a non-Matlab executable running on the client can make use of the same two networking models. However, if the solution similar to Plan A2 is chosen, the bridge might be used too as a data processing unit. The advantage of this is that the data can be transformed to a format that eases the processing on the client.
 \subsubsection{Plan C}
 The Webservice Model avoids the need of running a standalone executable or the need of a Matlab installation on the system running the client. The client connects to the network, and the full interface can be opened in a web browser by pointing the location to the url of the bridge. This will require data processing on the bridge, as it has to reformat the data send by simulink on the exoskeleton to a format suitable for sending over a websocket to the client. The client can not use a technique like polling because of the need for real-time data.
-
-\subsection{Data Packaging}
-\begin{itemize}
-	\item Two custom blocks in Matlab
-	\item State Table
-	\item Update rate 50 Hz
-\end{itemize}
