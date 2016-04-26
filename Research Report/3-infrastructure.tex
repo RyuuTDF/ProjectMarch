@@ -1,9 +1,8 @@
 \section{Existing Infrastructure}\label{sec:infra}
-\subsection{EtherCat}
-\label{sec:etherCat}
+The exoskeleton contains several sensors which need monitoring. Those sensors are connected to a master controller with EtherCat. 
 
 \subsection{Output Sensors}
-In order to monitor MARCH, it contains several sensors. Each sensor corresponds with a certain part of the exoskeleton and a certain type of measurement. The joints of MARCH that require monitoring are the hip joints, the knee joints and the ankle joints . MARCH contains five types of sensors:
+In order to monitor MARCH, it contains several sensors. Each sensor corresponds with a certain part of the exoskeleton and a certain type of measurement. The joints of MARCH that require monitoring are the hip joints, the knee joints and the ankle joints. MARCH contains five types of sensors:
 \subsubsection{IMU}
 An inertial measurement unit (IMU) is a device that measures and reports a craft's velocity, orientation, and gravitational forces. Each joint of MARCH contains an IMU. Together those IMU's are used to keep track of the position as well as the movement of the legs. The IMU's are also used to calculate the center of mass. 
 \subsubsection{Proximity sensors}
@@ -15,6 +14,9 @@ An encoder is a device that measures angular position or motion of a shaft or ax
 The six range finders are situated on the two shanks and are for range feedback. While the proximity sensors are used to prevent the feet from hitting small close objects, the Range Finders are used on a larger scale to get sense of the environment. They work by using echolocation.
 \subsubsection{Force/torque sensors}
 The four force/torque sensors are situated on the bottom of the feet. The sensors are based on an array of multiple regular 3-axis sensors. By knowing in which way each sensor deforms, the torque acting on the whole sensor can be calculated. These sensors provide 6 degrees of freedom force and torque measurement.
+\subsubsection{EtherCat}\label{sec:etherCat}
+EtherCat is Ethernet-based system for automation applications requiring short data update times with low communication jitter and reduced hardware costs. In MARCH, it is used to connect different parts of the system with each other. The most important part for this project is the EtherCat connection between the sensors and the central computer. 
+
 
 \begin{table}[]
 	\centering
@@ -38,3 +40,6 @@ The four force/torque sensors are situated on the bottom of the feet. The sensor
 \end{table}
 
 \subsection{Simulink}
+
+
+
