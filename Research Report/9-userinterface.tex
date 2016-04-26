@@ -15,8 +15,10 @@ The GUI (Graphic User Interface) consists of two parts. One part shows a dashboa
 	\includegraphics[width=.75\textwidth]{MockupGUI}
 	\caption{A mock-up with a possible look of the GUI} 
 \end{figure} 
-\subsection{Framework}
-In order to choose a language, there are two important factors in this project which have to be taken in account. Firstly, the framework should have a rich support of visualising data. Secondly, the framework must be able to support 3D rendering. Keeping this in mind, the options of languages are narrowed down to C/C++, Java \& Python because these are known to have a rich selection of libraries which support 3D rendering and data visualisation. In addition, since SimuLink is a Matlab module, using Matlab as framework is also an option. \\
+\subsection{Languages}
+For this project, it is important to use a language which has rich support for data visualisation and 3d-rendering. In addition, the chosen language must be able to (easily) interface Matlab since the sensor data will enter via a SimuLink model. In addition to the MATLAB language, C/C++, Java \& Python are valid options since Matlab has a build-in interface for these languages and these languages have libraries which support 3D rendering and data visualisation.\\ 
+
+
 The requirements state that data visualisation has a higher priority than 3D-rendering. Because of this, it is not essential that the chosen framework has an extensive 3D-library. In the end, Matlab was chosen as preferred framework for the GUI for the following reasons:
 \begin{itemize}
 	\item The required data is sent through SimuLink, which is a module of Matlab. This means that the data does not need to be converted.
@@ -25,11 +27,10 @@ The requirements state that data visualisation has a higher priority than 3D-ren
 \end{itemize}
 In the event that it proves to be impossible or undesirable to connect wireless directly using Matlab, there are three alternatives to consider. The first one is to create a receiver which listens on the port and can convert the data to a format which is readable by Matlab.
 \\The second option would be to use a stand-alone application which is based on another framework than Matlab. This would widen the range of possibilities for the use of the interface.
-%TODO betere argumentatie bedenken  
 \\The last option is to create the GUI in HTML as a web-page and put a web-socket in the page to get the data. This implementation is very user friendly, as the only required software for the client is a web-browser. In addition, this makes it very easy for multiple people to use the monitoring system since the exoskeleton will broadcast over the wi-fi instead of sending the data directly to another client. By using this method, the options for the framework are limited to JavaScript and its libraries. In addition, running code in a browser tends to be less powerful than running the code in a stand-alone application. This results in a lower update frequency and fewer options for data visualising.
 
 \subsection{3D-Rendering}
-Because of the fact that the 3d-rendering has shifted to a lower priority, less effort has been expended in researching suitable frameworks for rendering. Still, a small list have been compiled of some rendering frameworks which are simple to use for each of the narrowed down languages.
+Because of the fact that the 3d-rendering has shifted to a lower priority, less effort has been expended in researching suitable frameworks for rendering. Still, a small list have been compiled of some rendering frameworks which are simple to use for each of the narrowed down languages. In addition, Matlab also contains modules for 3d-rendering.
 \begin{itemize}
 	\item C/C++: Ogre3D \cite{web:ogre3d}
 	\item Java/Scala: Env3D \cite{web:env3d}
