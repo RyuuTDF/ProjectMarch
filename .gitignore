@@ -112,6 +112,9 @@ _minted*
 # nomencl
 *.nlo
 
+#odt
+*.odg#
+
 # sagetex
 *.sagetex.sage
 *.sagetex.py
