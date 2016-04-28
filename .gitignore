@@ -112,9 +112,6 @@ _minted*
 # nomencl
 *.nlo
 
-#odt
-*.odg#
-
 # sagetex
 *.sagetex.sage
 *.sagetex.py
@@ -163,3 +160,9 @@ TSWLatexianTemp*
 
 # Kile
 *.tex.backup
+
+# Dolphin
+.directory
+
+# LibreOffice / OpenOffice
+.~lock.*
