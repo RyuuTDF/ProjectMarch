@@ -1,17 +1,17 @@
 \section{Data Processing}\label{sec:dataproc}
 \subsection{Data Packaging}
-The target update rate is 50 Hz. Some sensors might send data more often, it is not advised to send through all the sensor data separately as this can create a large amount of packets and a lot of overhead. This will congest the wireless connection, which will lead to sensor failing to make the target rate. It is more efficient to collect the data and send it through at the set rate of 50 Hz. This will minimize the overhead, as only the lowest amount of needed packets will be send to the receiver.
+The Client is aiming for a 50 Hz update rate of the interface. Some sensors might send data more often, therefore it is not advised to send through all the sensor data separately as this can create a large amount of packets and a lot of overhead. This will congest the wireless connection, which will lead to the interface failing to make the target rate. It is more efficient to collect the data and send it through at the set rate of 50 Hz. This will minimize the overhead, as only the lowest amount of needed packets will be send to the receiver.
 
-The matrix that will collect the data will be a n x m matrix, where n is the amount of sensors and m is the amount of columns defined. Currently the following columns have been defined:\\
+The matrix that will collect the data will be a $n$ x $m$ matrix, where $n$ is the amount of sensors and $m$ is the amount of columns defined. Currently the following columns have been defined:\\
 \begin{enumerate}
 	\item Sensor label
 	\item Sensor type
 	\item Sensor data
 	\item Changed since last packet
 \end{enumerate}
-If a sensor sends it's data to the master, the corresponding `Sensor data'-value in the matrix will be updated and the column `Changed since last packet' will be set to `1'. Only the rows for which applies that `Changed since last packet' $==$ `1' will be added to the UDP packet that is send over to the receiver. After a packet has been sent, every value in the `Changed since last packet'-column gets reset back to `0'.
+If a sensor sends its data to the master, the corresponding `Sensor data'-value in the matrix will be updated and the column `Changed since last packet' will be set to `1'. Only the rows for which applies that `Changed since last packet' $==$ `1' will be added to the UDP packet that is send over to the receiver. After a packet has been sent, every value in the `Changed since last packet'-column will be reset back to `0'.
 
-The maximum data size for a UDP-packet in Matlab is `64k' or 65,536 bytes. The size of a double-value is 64 bits. Currently the exoskeleton has 47 sensors. To show that the matrix is scalable, let's take an example in which the exoskeleton has been upgraded to 100 sensors and there has been defined an extra column. The total data size will be $(100*5*64) = 32000$ bits $= 4000$ bytes which is still more than 16 times lower than the size limit. 
+The maximum data size for a UDP-packet in Matlab is `64k' or 65,536 bytes. The size of a double-value is 64 bits. Currently the exoskeleton has 47 sensors. To ensure that the matrix is scalable, let's take an example in which the exoskeleton has been upgraded to 100 sensors and there has been defined an extra column. The total data size will be $(100*5*64) = 32000$ bits $= 4000$ bytes, which is 16 times less than the size limit. 
 
 \subsection{Converting Raw Data}
-The sensor data which is received from the sensors is unitless. Therefore, the data has to be converted to the proper unit. This is why the column 'Sensor type ' was defined in the data matrix. Because of this, there is a separate method of converting data for each different type of sensor. 
+The sensor data which is received from the sensors is unitless. Therefore, the data has to be converted to the proper unit. This is why the column 'Sensor type' was defined in the data matrix. Because of this, it is possible to create a separate method of converting data for each type of sensor. The converting can be done on the bridge or the client,  reducing the load on the exoskeleton.
