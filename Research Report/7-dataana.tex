@@ -4,12 +4,12 @@ The Client is aiming for a 50 Hz update rate of the interface. Some sensors migh
 
 The matrix that will collect the data will be a $n$ x $m$ matrix, where $n$ is the amount of sensors and $m$ is the amount of columns defined. Currently the following columns have been defined:\\
 \begin{enumerate}
-	\item Sensor label
-	\item Sensor type
-	\item Sensor data
+	\item Signal label
+	\item Signal type
+	\item Signal data
 	\item Changed since last packet
 \end{enumerate}
-If a sensor sends its data to the master, the corresponding `Sensor data'-value in the matrix will be updated and the column `Changed since last packet' will be set to `1'. Only the rows for which applies that `Changed since last packet' $==$ `1' will be added to the UDP packet that is send over to the receiver. After a packet has been sent, every value in the `Changed since last packet'-column will be reset back to `0'.
+If a sensor sends its data to the master, the corresponding `Signal data'-value in the matrix will be updated and the column `Changed since last packet' will be set to `1'. Only the rows for which applies that `Changed since last packet' $==$ `1' will be added to the UDP packet that is send over to the receiver. After a packet has been sent, every value in the `Changed since last packet'-column will be reset back to `0'.
 
 The maximum data size for a UDP-packet in Matlab is `64k' or 65,536 bytes. The size of a double-value is 64 bits. Currently the exoskeleton has 47 sensors. To ensure that the matrix is scalable, let's take an example in which the exoskeleton has been upgraded to 100 sensors and there has been defined an extra column. The total data size will be $(100*5*64) = 32000$ bits $= 4000$ bytes, which is 16 times less than the size limit. 
 
