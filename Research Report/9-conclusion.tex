@@ -1,8 +1,10 @@
 \section{Conclusion}
 \subsection{Wireless Data Transfer}
-For the wireless data transfer, a Raspberry Pi 3 will be connected to the SpeedGoat via ethernet. This Raspberry Pi will build a transparent bridge between this interface and the wireless chip in accesspoint mode, to ensure that packets sent by Simulink on the SpeedGoat are relayed to the connected client(s).
+The implementation will be following the Transparent Bridge model as described in section \label{sec:tbm}. A Raspberry Pi 3 will be connected to the Speedgoat via ethernet. It will act as an access point and build a transparent bridge between the wired interface and the wireless chip, to ensure that packets sent by Simulink on the SpeedGoat are relayed to the connected client(s). The reason for choosing this model over the Listening Bridge Model is that it's less complex to implement. 
+
+As stated in section \ref{sec:datapac}, the data from the sensors will be collected in a matrix and send through at a set pace of 50 Hz. This is to minimize overhead and the risk of congestion. The data then gets processed further on the client.
 \subsection{Interface}
-The requirements state that data visualisation has a higher priority than 3D-rendering. Because of this, it is not essential that the chosen framework has an extensive 3D-library. In the end, Matlab was chosen as preferred framework for the GUI for the following reasons:
+The requirements in section \label{sec:req} state that data visualisation has a higher priority than 3D-rendering. Because of this, it is not essential that the chosen framework from section \ref{sec:Languages} has an extensive 3D-library. In the end, Matlab was chosen as preferred framework for the GUI for the following reasons:
 \begin{itemize}
 	\item The required data is sent through Simulink, which is a module of Matlab. This means that the data does not need to be converted.
 	\item Matlab has an extensive collection of data visualisation tools.

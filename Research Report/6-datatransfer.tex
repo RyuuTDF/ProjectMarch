@@ -29,11 +29,18 @@ When examining the time frame for delivering the various product parts, it was d
 
 \subsection{Improved models} \label{sec:impmod}
 Due to a lack of options to add wireless communication directly to the Speedgoat, bridging hardware is required to attach a wireless card on a wired interface on the Speedgoat. An abstract visualisation of this can be found in figure \ref{fig:improvedmodel}. The following models are based on the possibility to build a wireless connection via such a device. In all variants, this device will be configured as a wireless access point to which clients can connect.
-The proposed device for acting as a wireless bridge between the Speedgoat and the client is a Raspberry Pi 3. This board has both an ethernet port for connecting the Speedgoat and a wireless chip capable of running in accesspoint mode. On top of that, experience within the team of setting up networks with a Raspberry Pi is present.
+
+The proposed device for acting as a wireless bridge between the Speedgoat and the client is a Raspberry Pi 3. This board has both an ethernet port for connecting the Speedgoat and a wireless chip capable of running in accesspoint mode. On top of that, experience within the team of setting up networks with a Raspberry Pi is present.\\
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.75\textwidth]{ERBI-Model-RaspPie}
+	\caption{Abstract version of the improved model} 
+	\label{fig:improvedmodel}
+\end{figure} 
 
 \subsubsection{Transparant Bridge Model}\label{sec:tbm}
 This model requires the wireless bridge to transparently bridge the wired and wireless connections on the network level. This makes direct communication between the data provider (E) and client (I) possible. The Simulink model on the exoskeleton can directly send acquired data to a client with a GUI build in Matlab. By using Matlab to build the GUI we can make use of the extensive data visualization features and data processing features of Matlab without the need of translating this data for use with another program. 
-
 Although the chosen networking model does not differentiate between networking protocols, UDP send \cite{web:UDPSend} is considered as a good choice due to the ease of setting up non-blocking communication.
 
 \subsubsection{Listening Bridge Model}\label{sec:lbm}
@@ -45,9 +52,4 @@ The Standalone Model with a non-Matlab executable running on the client can make
 \subsubsection{Webservice Model}\label{sec:wm}
 The Webservice Model avoids the need of running a standalone executable or the need of a Matlab installation on the system running the client. The client connects to the network, and the full interface can be opened in a web browser by pointing the location to the url of the bridge. This will require data processing on the bridge, as it has to reformat the data send by Simulink on the exoskeleton to a format suitable for sending over a WebSocket to the client. The client can not use a technique like polling because of the need for real-time data.
 
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=.75\textwidth]{ERBI-Model-RaspPie}
-	\caption{Abstract version of the improved model} 
-	\label{fig:improvedmodel}
-\end{figure} 
+
