@@ -1,0 +1,44 @@
+\section{Existing Infrastructure}\label{sec:infra}
+This project will comprise of extensions to be made to existing software and hardware solutions in use by Project MARCH. Those various existing solutions, limited to the ones relevant to this project, are examined in the following subsections.
+\subsection{Output Sensors}
+In order to monitor MARCH, it contains several sensors. Each sensor corresponds with a certain part of the exoskeleton and a certain type of measurement. The joints of MARCH that require monitoring are the hip joints, the knee joints and the ankle joints. MARCH contains five types of sensors which are described in the following subsections and an overview can be found in the table \ref{tab:sensor} below.
+\subsubsection{IMU}
+An inertial measurement unit (IMU) is a device that measures and reports a craft's velocity, orientation, and gravitational forces. Each joint of MARCH contains an IMU. Together those IMUs are used to keep track of the position as well as the movement of the legs. The IMUs are also used to calculate the centre of mass. 
+\subsubsection{Proximity sensors}
+Proximity sensors are devices used to measure the distance based on the speed of light/sound. The eight proximity sensors are situated on the feet and are for range feedback. They are situated as such: two at the bottom (front and back of the foot) and the other two on the edges towards the anterior and posterior coronal plane on the soles of the feet (again front and back). 
+\subsubsection{Encoders}
+An encoder is a device that measures the angular position or motion of a shaft or axle. MARCH contains 16 rotary encoders in each joint and 6 in each motor. Each joint has one torque and one angle encoder, while each foot joint contains 2 more encoders for the ankles. Each motor just has a torque encoder.
+\subsubsection{Range finders}
+The six range finders are situated on the two shanks and are for range feedback. While the proximity sensors are used to prevent the feet from hitting small close objects, the range finders are used on a larger scale to get sense of the environment. They work by using echolocation.
+\subsubsection{Force/torque sensors}
+The four force/torque sensors are situated on the bottom of the feet. The sensors are based on an array of multiple regular 3-axis sensors. By knowing in which way each sensor deforms, the torque acting on the whole sensor can be calculated. These sensors provide 6 degrees of freedom force and torque measurement.
+\subsection{EtherCAT}\label{sec:etherCat}
+EtherCAT is an Ethernet-based system for automation applications that require short data update times with low communication jitter and reduced hardware costs. In MARCH, it is used to connect different parts of the system with each other. The relevant part for this project is the EtherCAT connection between the sensors and the central computer, as the sensor data gets send to the central computer. This central computer is also knows as `Speedgoat', and will be referred to as such.
+\subsection{Simulink} 
+Simulink is a block diagram environment in Matlab that can be used for multi-domain simulation. The EtherCAT configuration that MARCH uses is loaded into Simulink. This allows the system to exchange data between parts more easily. 
+
+\begin{table}[]
+	\centering
+	\begin{tabular}{|l|c|c|c|c|c|c|c|}
+		\hline
+		& \multicolumn{1}{l|}{IMU} & \multicolumn{1}{p{15mm}|}{Proximity sensor} & \multicolumn{1}{p{15mm}|}{Torque encoder} & \multicolumn{1}{p{15mm}|}{Angular encoder} & \multicolumn{1}{p{15mm}|}{Range finders} & \multicolumn{1}{p{15mm}|}{Force/ torque sensor} & \multicolumn{1}{l|}{Total} \\ \hline
+		Back                  & 1                        &                                       &                                     &                                      &                                    &                                          & 1                          \\ \hline
+		Hip joints(L/R)       & 2                        &                                       & 2                                   & 2                                    &                                    &                                          & 6                          \\ \hline
+		Ankle joints(L/R)     & 2                        &                                       & 4                                   & 4                                    &                                    &                                          & 10                         \\ \hline
+		Knee joints(L/R)      & 2                        &                                       & 2                                   & 2                                    &                                    &                                          & 6                          \\ \hline
+		Shanks(L/R)           &                          &                                       &                                     &                                      & 6                                  &                                          & 6                          \\ \hline
+		Bottom feet(L/R)(F/B) &                          & 4                                     &                                     &                                      &                                    & 4                                        & 8                          \\ \hline
+		Edges feet(L/R)(A/P)  &                          & 4                                     &                                     &                                      &                                    &                                          & 4                          \\ \hline
+		Hip motor(L/R)        &                          &                                       & 2                                   &                                      &                                    &                                          & 2                          \\ \hline
+		Ankle motor(L/R)      &                          &                                       & 2                                   &                                      &                                    &                                          & 2                          \\ \hline
+		Knee motor(L/R)       &                          &                                       & 2                                   &                                      &                                    &                                          & 2                          \\ \hline
+		Total                 & 7                        & 8                                     & 14                                  & 8                                    & 6                                  & 4                                        & 47                         \\ \hline
+	\end{tabular}
+	\caption{Overview sensors}
+	\label{tab:sensor}
+\end{table}
+
+
+
+
+

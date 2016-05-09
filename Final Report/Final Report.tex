@@ -1,0 +1,65 @@
+\documentclass [a4paper,11pt]{report}
+\usepackage{uarial}
+\usepackage[english]{babel}
+\usepackage[toc,page]{appendix}
+
+% Format the chapter headings
+\usepackage[T1]{fontenc}
+\usepackage{titlesec, blindtext, color}
+\usepackage[hidelinks]{hyperref}
+
+% Basic A4 paper settings with extra space
+\usepackage[a4paper]{geometry}
+\usepackage{a4wide}
+
+% Input encoding as UTF8
+\usepackage[utf8]{inputenc}
+
+% For figures
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{wrapfig}
+\usepackage{float}
+
+% For math formulas
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+
+% For euro sign
+\usepackage{eurosym}
+%diametersign
+\usepackage{wasysym}
+
+% For lists
+\usepackage{tabto}
+\usepackage{enumitem}
+
+\bibliographystyle{ieeetr}
+
+% Title and authors
+\title{Research Report}
+\author{Jens Voortman \and Ruben Visser \and Vasco de Bruijn}
+
+\newcommand{\rulesep}{\unskip\ \vrule\ }
+
+\begin{document}
+%Everything before Chapter 1.
+\input{layout/layout}
+
+\pagenumbering{arabic}
+%Chapter 1: Introduction
+\input{intro/introduction}
+
+%Chapter 2: Research
+\input{research/chapter-research}
+
+%Chapter x: Implementation
+\input{implementation/chapter-implementation}
+
+\appendix
+\input{appendix/appendixes}
+\bibliography{biblio}
+
+\end{document}
