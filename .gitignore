@@ -166,3 +166,6 @@ TSWLatexianTemp*
 
 # LibreOffice / OpenOffice
 .~lock.*
+
+#Allow Logo
+!/Final Report/logo/*.pdf
