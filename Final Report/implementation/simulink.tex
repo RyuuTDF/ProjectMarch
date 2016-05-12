@@ -1,6 +1,29 @@
-\section{Simulink}
-\subsection{Program Limitations}
+\section{Simulink}\label{sec:simulink}
+
+\subsection{Program Limitations}\label{sec:simprolim}
+Simulink is an block diagram environment integrated in Matlab, but can be compiled for standalone usage. Since it's integrated in Matlab, Simulink has blocks that support Matlab-code. However there are things that can be done in Matlab, but not in a standalone-compiled Simulink-model. This meant the team ran into a lot of limitations during the first two weeks of coding. In the following sections the limitations the team ran into will be discussed and described how they impacted the final implementation.
+
 \subsubsection{Cell Arrays}
+Simulink is signal-based. This means 
+However, the only way to 
+This issue was solved by immediately serializing the data in the Signal Block instead of waiting until the data was fed to the UDP Send-block. The serialized output was a uint8-array, which is a signal Simulink supports.
+
 \subsubsection{Data Stores}
-\subsubsection{GoTo/From Blocks}
+Not recommended because of fixed size limit. Generates lots of extra memory allocation
+
 \subsubsection{SQL}
+Can't be used cause Database object doesnt support code generation.
+
+\subsection{First Implementation}\label{sec:simfirim}
+\subsubsection{Init Block}
+\subsubsection{Signal Block}
+\subsubsection{Connecting the blocks}
+GoTo/From Blocks
+
+\subsection{Final Implementation}\label{sec:simfinim}
+Waiting for the model.
+\subsubsection{Init Block}
+\subsubsection{Signal Block}
+\subsubsection{Connecting the blocks}
+
+
