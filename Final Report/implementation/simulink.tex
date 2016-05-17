@@ -1,29 +1,36 @@
 \section{Simulink}\label{sec:simulink}
 
 \subsection{Program Limitations}\label{sec:simprolim}
-Simulink is an block diagram environment integrated in Matlab, but can be compiled for standalone usage. Since it's integrated in Matlab, Simulink has blocks that support Matlab-code. However there are things that can be done in Matlab, but not in a standalone-compiled Simulink-model. This meant the team ran into a lot of limitations during the first two weeks of coding. In the following sections the limitations the team ran into will be discussed and described how they impacted the final implementation.
+Simulink is an block diagram environment integrated in Matlab, but can be compiled for standalone usage. Since it's integrated in Matlab, Simulink has blocks that support Matlab-code. However there are things that can be done in Matlab, but not in a standalone-compiled Simulink-model. This meant the team ran into a lot of limitations during the first two weeks of coding. In the following sections the limitations the team ran into will be discussed and described how they impacted the implementation.
 
 \subsubsection{Cell Arrays}
-Simulink is signal-based. This means 
-However, the only way to 
-This issue was solved by immediately serializing the data in the Signal Block instead of waiting until the data was fed to the UDP Send-block. The serialized output was a uint8-array, which is a signal Simulink supports.
+Simulink is signal-based, the only data-types supported between the blocks are integers and floating points. The original idea had a Cell Array being created to be used as State Table, as that array type supports numbers as well as character arrays (strings). However, as a Cell Array can contain character arrays, they can't be used to send data between blocks in Simulink. Furthermore, the Cell Array-class has only limited support for code generation and the generation does not support variable sized Cell Arrays. This meant they could not be used in the code.
 
-\subsubsection{Data Stores}
-Not recommended because of fixed size limit. Generates lots of extra memory allocation
+The first part of the issue was solved by serializing the data in the Signal Block instead of waiting until the data was fed to the UDP Send-block. The serialized output is a uint8-array, which is a signal Simulink supports. Once the data is deserialized on the client machine, it could be formatted correctly. For the second part of the issue, the team had to do more research to search for alternatives.
+
+\subsubsection{Data Store Memory Blocks}
+With the Cell Array not implementable, the team looked to see whether the serialized data could be send to the Data Store Memory \cite{web:datastore}. However the Data Store Memory also has its limitations:
+\begin{enumerate}
+	\item Every time a signal writes to the Data Memory Store, the previous write is deleted. This means that the blocks can be used to store single signals, but not be used as a state table.
+	\item The Data Memory Store does not support variable-sized signals. Therefore a fixed size array needs to be declared. This leads to a lot of allocated memory that gets wasted, since it does not store an data.
+\end{enumerate}
+Using the arguments above, this alternative was deemed as not recommended. Even though the blocks could be used to transfer the data, a lot of memory would be wasted.
 
 \subsubsection{SQL}
-Can't be used cause Database object doesnt support code generation.
+Since Data Store Memory blocks were not recommended, the next alternative was to see if a SQL database could be used. To store the Simulink model, the Speedgoat uses an SSD. The SSD would be big enough to store such a database on. The state table would be part of the database and each signal block could write its data to it. However, the Database Class does not support code generation at all, therefore this alternative was deemed implementable.
 
 \subsection{First Implementation}\label{sec:simfirim}
-\subsubsection{Init Block}
+\subsubsection{Connecting the blocks to the subsystem}
+This implementation uses a combination of From \cite{web:from} and Goto \cite{web:goto} blocks. The output of every signal block is connected to a Goto block, then in the UDP Subsystem a corresponding From block is placed. To keep these blocks manageable, the labels of the Goto and From blocks should be set to match the signal label they correspond to. This way when the signals in the model are updated, it is easier to add or remove the correct connection-blocks.
+
+Once the team had created a test for these blocks, they called the Tech Support of MathWorks, the makers of MATLAB and Simulink, to ask whether they knew more alternatives or ways to improve this implementation. After the Tech Support consulted among themselves, they replied that they thought the Goto/From blocks-combination would be the best suited solution as well. They did give the suggestion to check whether it was possible to combine the signals in the subsystems, as this would reduce the amount of blocks in the UDP Subsystem.
+%TODO: Is dit ook gelukt?
+
 \subsubsection{Signal Block}
-\subsubsection{Connecting the blocks}
-GoTo/From Blocks
+\subsubsection{UDP Subsystem}
 
 \subsection{Final Implementation}\label{sec:simfinim}
-Waiting for the model.
-\subsubsection{Init Block}
-\subsubsection{Signal Block}
-\subsubsection{Connecting the blocks}
+When the first version of the blocks were ready, the team had to wait before they could test it in practice. The exoskeleton was still being constructed by this time, so the test model could only run with simulated data. In this section the changes to the first implementation will be described, that made sure the model integrated with the exoskeleton model.
+
 
 
