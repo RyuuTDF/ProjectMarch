@@ -23,11 +23,16 @@ Since Data Store Memory blocks were not recommended, the next alternative was to
 \subsubsection{Connecting the blocks to the subsystem}
 This implementation uses a combination of From \cite{web:from} and Goto \cite{web:goto} blocks. The output of every signal block is connected to a Goto block, then in the UDP Subsystem a corresponding From block is placed. To keep these blocks manageable, the labels of the Goto and From blocks should be set to match the signal label they correspond to. This way when the signals in the model are updated, it is easier to add or remove the correct connection-blocks.
 
-Once the team had created a test for these blocks, they called the Tech Support of MathWorks, the makers of MATLAB and Simulink, to ask whether they knew more alternatives or ways to improve this implementation. After the Tech Support consulted among themselves, they replied that they thought the Goto/From blocks-combination would be the best suited solution as well. They did give the suggestion to check whether it was possible to combine the signals in the subsystems, as this would reduce the amount of blocks in the UDP Subsystem.
-%TODO: Is dit ook gelukt?
+Once the team had created a test for these blocks, they called the Tech Support of MathWorks, the makers of MATLAB and Simulink, to ask whether they knew more alternatives or ways to improve this implementation. After the Tech Support consulted among themselves, they replied that they thought the Goto/From blocks-combination would be the best suited solution as well. They did give the suggestion to check whether it was possible to combine the signals in the subsystems, as this would reduce the amount of blocks in the UDP Subsystem. The team would check whether it was possible to implement this in the final model.
 
 \subsubsection{Signal Block}
+%TODO
+Serialize based on \cite{web:serialize}.
 \subsubsection{UDP Subsystem}
+%TODO
+
+% Concatenate vectors with timer in front
+% Triggered subsystem that sends UDP Packet
 
 \subsection{Final Implementation}\label{sec:simfinim}
 When the first version of the blocks were ready, the team had to wait before they could test it in practice. The exoskeleton was still being constructed by this time, so the test model could only run with simulated data. In this section the changes to the first implementation will be described, that made sure the model integrated with the exoskeleton model.

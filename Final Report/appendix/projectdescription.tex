@@ -1,1 +1,19 @@
 \chapter{Project Description}
+\subsubsection{Introduction}
+In preparation for the 2016 Cybathlon in Zurich the student dream team ``Project MARCH'' is designing and building an exoskeleton for paraplegic people. The exoskeleton has many sensors which acquire data from their surroundings and are further processed in Simulink. The model is finally compiled, using the Etherlab provided compiler, which creates a stand-alone executable. This executable, thanks to Etherlab, also exposes a TCP server which can be hooked into to read all the sensor data. The data is exposed in an XML stream (XML over TCP).
+
+\subsubsection{Goal}
+Project MARCH wishes to have a system which allows monitoring and visualization of all vital sensor data. The students will therefore be tasked to design and implement a system which hooks into the existing API and allows the monitoring of all the sensors of the exoskeleton in a visual.
+
+As it stands now only the raw sensor data can be extracted which is of no use since they are unitless. Such a monitoring system would require the selection of an arbitrary sensor and its monitoring view (e.g. graph, text field, toggle). Furthermore, some sensors are used to measure the location and orientation of parts of the exoskeleton in 3D-space. These parts and their orientation should be visualized in the monitoring system in 3D.
+
+The students are free to choose what language is used for development. Version control in git is required.
+
+\subsubsection{Company description}
+The team of project MARCH consists of a young multidisciplinary team of students from Delft University of Technology, with one vision: to re-enable paraplegics to participate in daily life activities, such as getting up from a sofa or climbing the stairs. Some of these activities are experienced as very challenging or impossible by paraplegic patients. Therefore, the team will develop an exoskeleton that will give back their mobility.
+
+An exoskeleton is a harness that simulates or strengthens the natural movement of the human body. Next to giving back mobility to paraplegics, exoskeletons can be used for people working under extreme conditions, such as fire fighters or heavy construction workers. By using an exoskeleton, these heavy loads can be alleviated. Although exoskeletons can be used in multiple ways, this team will focus primarily on the development of an exoskeleton for paraplegic patients.
+
+Upcoming year, an exoskeleton will be built based on the concept of the MINDWALKER. The MINDWALKER is an existing functional exoskeleton developed by a European collaboration with the Delft University of Technology and Twente University of Technology. The MINDWALKER is a `laboratory prototype' by a so-called Research and Development project. This means that many aspects of the exoskeleton can still be optimized.
+
+Project MARCH will use the knowledge gained by the MINDWALKER to develop a new more versatile and adaptable exoskeleton for daily life. After a year of engineering and fine tuning, the exoskeleton will be tested during the Cybathlon race in Zürich, October 2016. This will be the first bionic world championships where different teams will compete in different disciplines.
