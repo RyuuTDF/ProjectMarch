@@ -2,11 +2,11 @@
 \usepackage{uarial}
 \usepackage[english]{babel}
 \usepackage[toc,page]{appendix}
+\usepackage[nottoc]{tocbibind}
 
 % Format the chapter headings
 \usepackage[T1]{fontenc}
 \usepackage{titlesec, blindtext, color}
-\usepackage[hidelinks]{hyperref}
 
 % Basic A4 paper settings with extra space
 \usepackage[a4paper]{geometry}
@@ -36,7 +36,19 @@
 \usepackage{tabto}
 \usepackage{enumitem}
 
+\usepackage[hidelinks]{hyperref}
+
 \bibliographystyle{ieeetr}
+
+\newcommand{\hsp}{\hspace{20pt}}
+\newcommand{\hsq}{\hspace{10pt}}
+\newcommand{\hso}{\hspace{5pt}}
+
+\titleformat{\chapter}[hang]{\Huge\bfseries}{\thechapter\hsp{|}\hsp}{0pt}{\Huge\bfseries\color{cyan}}
+\titleformat{\section}[hang]{\Large\bfseries}{\thesection\hsq{|}\hsq}{0pt}{\Large\bfseries\color{cyan}}
+\titleformat{\subsection}[hang]{\large\bfseries}{\thesubsection\hso{|}\hso}{0pt}{\large\bfseries\color{cyan}}
+\titleformat{\subsubsection}[hang]{}{}{0pt}{\normalsize\bfseries\color{cyan}}
+
 
 % Title and authors
 \title{Final Report}
@@ -61,6 +73,8 @@
 
 \appendix
 \input{appendix/appendixes}
+
+\raggedright
 \bibliography{biblio}
 
 \end{document}

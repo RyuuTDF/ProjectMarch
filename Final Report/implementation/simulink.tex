@@ -19,23 +19,51 @@ Using the arguments above, this alternative was deemed as not recommended. Even 
 \subsubsection{SQL}
 Since Data Store Memory blocks were not recommended, the next alternative was to see if a SQL database could be used. To store the Simulink model, the Speedgoat uses an SSD. The SSD would be big enough to store such a database on. The state table would be part of the database and each signal block could write its data to it. However, the Database Class does not support code generation at all, therefore this alternative was deemed implementable.
 
-\subsection{First Implementation}\label{sec:simfirim}
-\subsubsection{Connecting the blocks to the subsystem}
-This implementation uses a combination of From \cite{web:from} and Goto \cite{web:goto} blocks. The output of every signal block is connected to a Goto block, then in the UDP Subsystem a corresponding From block is placed. To keep these blocks manageable, the labels of the Goto and From blocks should be set to match the signal label they correspond to. This way when the signals in the model are updated, it is easier to add or remove the correct connection-blocks.
+\pagebreak
 
-Once the team had created a test for these blocks, they called the Tech Support of MathWorks, the makers of MATLAB and Simulink, to ask whether they knew more alternatives or ways to improve this implementation. After the Tech Support consulted among themselves, they replied that they thought the Goto/From blocks-combination would be the best suited solution as well. They did give the suggestion to check whether it was possible to combine the signals in the subsystems, as this would reduce the amount of blocks in the UDP Subsystem. The team would check whether it was possible to implement this in the final model.
+\subsection{First Implementation}\label{sec:simfirim}
+With the problems described in \ref{sec:simprolim} in mind, the team eventually found a working solution. In this section this working implementation will be described. The visual representation of the implemented library can be found in figure \ref{fig:firstmonsys}. The blocks in this library can be copied over to the exoskeleton model.
+
+\subsubsection{Connecting the blocks to the subsystem}
+The implementation uses a combination of From \cite{web:from} and Goto \cite{web:goto} blocks. The output of every signal block is connected to a Goto block, then in the `UDP Packet' Subsystem a corresponding From block is placed. To keep these blocks manageable, the labels of the Goto and From blocks should be set to match the signal label they correspond to. This way when the signals in the model are updated, it is easier to add or remove the correct connection-blocks.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.75\textwidth]{implementation/library}
+	\caption{First implementation of the Monitoring System Library} 
+	\label{fig:firstmonsys}
+\end{figure}
 
 \subsubsection{Signal Block}
-%TODO
-Serialize based on \cite{web:serialize}.
-\subsubsection{UDP Subsystem}
-%TODO
+The Signal Block consists of a pop-up and a Matlab function. In the pop-up, the parameters `Label', `Type', `Minimum Safe Value' and `Maximum Safe Value' can be defined by the user. The layout of this pop-up can be seen in figure \ref{fig:firstpopup}. The Matlab function takes these parameters and the signal value. The function then serializes them separately and merges the resulting arrays together. The code for serialization was adapted from Christian Kothe's implementation \cite{web:serialize}. The output of the block is the serialized array from the function.
 
-% Concatenate vectors with timer in front
-% Triggered subsystem that sends UDP Packet
+\subsubsection{UDP Packet Subsystem}
+The `UDP Packet' subsystem, shown in figure \ref{fig:firstmonsys}, needs to be copied over to the top level of the Simulink model it's being used in. The inside of this subsystem is shown in figure \ref{fig:firstudpsys}. As stated above, the From-block of each signal gets placed here. The serialized signals then get combined with a `Vector Concatenate' block into one big vector. The amount of inputs of this block can be changed, depending on how many signals need to be combined. Furthermore, a timer gets added at the beginning of the vector, so that it is possible to keep track of the elapsed time. This concatenated vector then gets send through to the `Send UDP packet' subsystem. This subsystem is being triggered with a rate of 50 Hz and sends out a UDP Packet at every trigger.
+
+\begin{figure}[H]
+	\centering
+	\begin{minipage}{.39\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{implementation/popup}
+		\subcaption{Signal Block Pop-up}
+		\label{fig:firstpopup}
+	\end{minipage}
+	\rulesep
+	\begin{minipage}{.59\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{implementation/UDPPacket}
+		\subcaption{UDP Packet Subsystem}
+		\label{fig:firstudpsys}
+	\end{minipage}
+	\caption{More in-depth look at the blocks}
+	\label{fig:firstimplementation}
+\end{figure}
+
+\subsubsection{Possible Improvements}
+When the first implementation was completed, the exoskeleton was not completely assembled yet and did not have a Simulink model available. Therefore the team created a test simulation that used random values, instead of real signals. Once this was done, the team called the Tech Support of MathWorks, the makers of MATLAB and Simulink, to ask whether they knew more alternatives or ways to improve how the signal outputs were being transferred. After the Tech Support consulted among themselves, they replied that they too thought the Goto/From blocks-combination would be the best suited solution. They did give the suggestion to check whether it was possible to combine the signals in the subsystems instead, as this would reduce the amount of blocks in the `UDP Packet' Subsystem. The team would check whether it was possible to implement this in the final model.
 
 \subsection{Final Implementation}\label{sec:simfinim}
-When the first version of the blocks were ready, the team had to wait before they could test it in practice. The exoskeleton was still being constructed by this time, so the test model could only run with simulated data. In this section the changes to the first implementation will be described, that made sure the model integrated with the exoskeleton model.
+As stated in the previous section, when the first version of the library was ready, the team had to wait before it could be tested in practice. In this section the changes to the first implementation will be described, that made sure the library worked with the exoskeleton model.
 
 
 
