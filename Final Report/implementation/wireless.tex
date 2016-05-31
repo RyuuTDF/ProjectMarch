@@ -1,1 +1,32 @@
 \section{Wireless Transfer}
+This section will cover the implementation of the data transfer. Although the decision made in the research was to use a transparent network bridge\ref{tbm}, some obstacles on getting that to work well directed in switching to the listening bridge model\ref{lbm} to avoid them. The next subsections cover the set up process for the Raspberry Pi, the software written to use on the Raspberry Pi or connected systems, and why some software written was deemed unsuitable for use.
+\subsection{Used existing software}
+Apart from some software libraries, there are two existing software packages used to provide the required networking features. The next paragraphs will cover why hostapd and dnsmasq were selected.
+
+Hostapd (host access point daemon) is used to set up the wireless network on the Raspberry Pi in access point mode. By providing an access point to which computers running the monitoring client can connect, bothersome networking set up is avoided. The client connects to the access point, starts the monitoring client and that is all from a networking point of view.
+
+Unfortunately, only providing an access point is not enough to provide a smooth network set up. Most (if not all) clients that connect will try to obtain an IP-address using DHCP, and this is where dnsmasq comes in. Although the name of this package implies it provides a DNS server, this package also provides other services from which the DHCP capability is used. It is configured to assign addresses in two ranges bound to both the wireless and wired networking interface on the Raspberry PI respectively.
+
+In contrast to the original plan, the Raspberry Pi will not create one network. Forwarding packages between the two network interfaces with iptables in the desired configuration turned out not to be possible, so the transparent bridge model was set aside and a custom forwarding solution was written. This solution will be covered in some of the following subsections.
+
+\subsection{Scripted installation}
+In order to simplify the installation of the Raspberry Pi, a set up script was written to perform the installation and configuration of the required software on the Raspberry Pi. The only requirements for running this script are a Raspberry Pi with Raspbian (the recommended Linux distribution), an internet connection and the script itself. The script will download and install all required software and configuration files.
+
+A script written in Python accompanies the installation script to perform modifications, additions and replacement of existing configuration files and the installation of new ones in the correct locations. This part of the installation is not written in Bash to avoid the somewhat steep learning curve of doing those operations in Bash.
+
+\subsection{Networking bridge}
+Due to the switch to the listening bridge model, bridging software had to be written to run on the Raspberry Pi. The first implementation for this was a script written in Python, accompanied by a script to display some basic metrics of the system. However, after testing this implementation with the performance testing software, which will be covered later on in detail, this script was found unable to deliver the required performance. Before modifications the network was unable to process the amount of packages, and after improvements on that Python lacked performance to do the required data compression.
+
+To leave behind all of the networking performance issues, the bridging software was rewritten in C. While staying compatible with the companion script, the system load decreased with 90\% compared with the improved script written in Python.
+
+To cope with the performance issues as mentioned before, a solution to keep network packets under 1500 bytes (one ethernet frame on the wireless interface) was needed. When this limit is exceeded, the network layer has to break up the packets on the sender and reassemble them on the receiver, causing a severe performance hit. Our own stress test Simulink model generates packets with a size of about 7500 bytes, which can be reduced to 4500 bytes by using the deflate compression algorithm. Although this is going in the right direction, the packages are still too large by a factor of three.
+
+The last improvement made to reach the desired packet size, was to make use of prior knowledge of the packet contents. Much of the data does not change between packets, so by using xor on the current and previous data the result will comprise many bytes with zero as value. By using deflate on this xorred data, the packet size can be reduced to less than 400 bytes. To avoid issues when packets are still lost, the first packet will be kept as reference and all the following packets will be xorred with the first.
+
+To make sure that any connected client obtains this reference packet, a seperate program was written. The bridging program will store the reference packet, and when a client sends a request for a reference packet this program will return one. Being the only program listening to requests from clients, it also handles requests for recording. This is covered a bit more in depth in the section about data recording.
+
+\subsection{Network performance}
+
+%TODO Program with logging for measuring network performance
+%TODO Program for recording data
+%TODO Program for retreiving recorded data from the Rapsberry Pi (http?)
