@@ -42,7 +42,8 @@ it is possible to toggle between two predefined sizes. These are defined in a se
 
 
 \subsubsection{Limitations}
-%TODO something something performance
+Showing which sensors have exceeded their minimum or maximum values is one of the most important features of the Monitoring System according to the members of the Project MARCH team, since this means that something has gone seriously wrong with the exoskeleton. Therefore each update, the sensor values are checked if they do not exceed the minimum or maximum values. If a value lies outside this range, the table of sensors is redrawn immediately with the offending sensor marked red. While testing with data which frequently exceeds the minimum/maximum values, it turned out that this heavily impaired the performance as the table of sensors gets rendered a lot more frequently compared to usual use. However, since receiving outliers in the sensor data is supposed to be exceptional and an indicator that something is broken in the exoskeleton, performance is subsidiary to showing that there is something wrong.
+
 
 \begin{figure}[H]
 	\centering
@@ -54,8 +55,22 @@ it is possible to toggle between two predefined sizes. These are defined in a se
 \subsection{Fourth Sprint}
 
 \subsubsection{Interface}
+%TOTO moar graphs
+%TOTO bigger screen
+%TODO update control
 
 \subsubsection{Performance}
-%TODO fixed that shit
+When testing for performance, the Matlab profiler showed that the function used to plot the graphs took a lot of time. It turned out that the functions used to plot and clear the graphs have more functionality than just plotting a line and therefore have unnecessary overhead. In order to solve this problem, instead of using a plot function, a line object is created for each graph. If the line object is updated, only the line is redrawn instead of the entire graph. This resulted in a huge performance boost which increased the best case update rate from 20 Hz to 100 Hz.\\
+
+%TODO changed control loop of update function
+Now that it is possible to have an update rate for the GUI which is higher than the update rate of the data packages, the GUI needs to be able to deal with an empty queue of packets. In earlier iterations of the system, this was done by repeating the latest data in the update function. However, this makes it seem that there is new data when there is none. This has been changed in a wait-loop which waits if there is no packet in the queue and otherwise runs the regular update flow as can be seen in \ref{fig:UpdateFlow}. 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.75\textwidth]{images/UpdateFlow}
+	\caption{Diagram which shows how the update flow is structured} 
+	\label{fig:UpdateFlow}
+\end{figure} 
+
+
 
 
