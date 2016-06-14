@@ -1,10 +1,10 @@
 \section{Simulink}\label{sec:simulink}
 
 \subsection{Program Limitations}\label{sec:simprolim}
-Simulink is an block diagram environment integrated in Matlab, but can be compiled for standalone usage. Since it's integrated in Matlab, Simulink has blocks that support Matlab-code. However there are things that can be done in Matlab, but not in a standalone-compiled Simulink-model. This meant the team ran into a lot of limitations during the first two weeks of coding. In the following sections the limitations the team ran into will be discussed and described how they impacted the implementation.
+Simulink is an block diagram environment integrated in Matlab, but can be compiled for standalone usage. Since it is integrated in Matlab, Simulink has blocks that support Matlab-code. However there are things that can be done in Matlab, but not in a standalone-compiled Simulink-model. This meant the team ran into a lot of limitations during the first two weeks of coding. In the following sections the limitations the team ran into will be discussed and described how they impacted the implementation.
 
 \subsubsection{Cell Arrays}
-Simulink is signal-based, the only data-types supported between the blocks are integers and floating points. The original idea had a Cell Array being created to be used as State Table, as that array type supports numbers as well as character arrays (strings). However, as a Cell Array can contain character arrays, they can't be used to send data between blocks in Simulink. Furthermore, the Cell Array-class has only limited support for code generation and the generation does not support variable sized Cell Arrays. This meant they could not be used in the code.
+Simulink is signal-based, the only data-types supported between the blocks are integers and floating points. The original idea had a Cell Array being created to be used as State Table, as that array type supports numbers as well as character arrays (strings). However, as a Cell Array can contain character arrays, they can not be used to send data between blocks in Simulink. Furthermore, the Cell Array-class has only limited support for code generation and the generation does not support variable sized Cell Arrays. This meant they could not be used in the code.
 
 The first part of the issue was solved by serializing the data in the Signal Block instead of waiting until the data was fed to the UDP Send-block. The serialized output is a uint8-array, which is a signal Simulink supports. Once the data is deserialized on the client machine, it could be formatted correctly. For the second part of the issue, the team had to do more research to search for alternatives.
 
@@ -36,7 +36,7 @@ The implementation uses a combination of From \cite{web:from} and Goto \cite{web
 The Signal Block consists of a pop-up and a Matlab function. In the pop-up, the parameters `Label', `Type', `Minimum Safe Value' and `Maximum Safe Value' can be defined by the user. The layout of this pop-up can be seen in figure \ref{fig:firstpopup}. The Matlab function takes these parameters and the signal value. The function then serializes them separately and merges the resulting arrays together. The code for serialization was adapted from Christian Kothe's implementation \cite{web:serialize}. The output of the block is the serialized array from the function.
 
 \subsubsection{UDP Packet Subsystem}
-The `UDP Packet' subsystem, shown in figure \ref{fig:firstmonsys}, needs to be copied over to the top level of the Simulink model it's being used in. The inside of this subsystem is shown in figure \ref{fig:firstudpsys}. As stated above, the From-block of each signal gets placed here. The serialized signals then get combined with a `Vector Concatenate' block into one big vector. The amount of inputs of this block can be changed, depending on how many signals need to be combined. Furthermore, a timer gets added at the beginning of the vector, so that it is possible to keep track of the elapsed time. This concatenated vector then gets send through to the `Send UDP packet' subsystem. This subsystem is being triggered with a rate of 50 Hz and sends out a UDP Packet at every trigger.
+The `UDP Packet' subsystem, shown in figure \ref{fig:firstmonsys}, needs to be copied over to the top level of the Simulink model it is being used in. The inside of this subsystem is shown in figure \ref{fig:firstudpsys}. As stated above, the From-block of each signal gets placed here. The serialized signals then get combined with a `Vector Concatenate' block into one big vector. The amount of inputs of this block can be changed, depending on how many signals need to be combined. Furthermore, a timer gets added at the beginning of the vector, so that it is possible to keep track of the elapsed time. This concatenated vector then gets send through to the `Send UDP packet' subsystem. This subsystem is being triggered with a rate of 50 Hz and sends out a UDP Packet at every trigger.
 
 \begin{figure}[H]
 	\centering
@@ -61,18 +61,17 @@ The `UDP Packet' subsystem, shown in figure \ref{fig:firstmonsys}, needs to be c
 When the first implementation was completed, the exoskeleton was not completely assembled yet and did not have a Simulink model available. Therefore the team created a test simulation that used random values, instead of real signals. Once this was done, the team called the Tech Support of MathWorks, the makers of MATLAB and Simulink, to ask whether they knew more alternatives or ways to improve how the signal outputs were being transferred. After the Tech Support consulted among themselves, they replied that they too thought the Goto/From blocks-combination would be the best suited solution. They did give the suggestion to check whether it was possible to combine the signals in the subsystems instead, as this would reduce the amount of blocks in the `UDP Packet' Subsystem. The team would check whether it was possible to implement this in the final model.
 
 \subsection{Final Implementation}\label{sec:simfinim}
-As stated in the previous section, when the first version of the library was ready, the team had to wait before it could be tested in practice. In this section the changes to the first implementation will be described, that made sure the library worked with the hardware of the exoskeleton.
+As stated in the previous section, when the first version of the library was ready, the team had to wait before it could be tested in practice. When the first tests on the SpeedGoat were run, a couple of issues arose. In this section the changes to the first implementation will be described, that made sure the library worked with the hardware of the exoskeleton.
 
 \subsubsection{Changing the Function Block}
+The first issue was the block that serializes the signal. The block described in section \ref{sec:simfirim} was a `Level-2 Matlab S-Function' block. When this block needs to run on an external system, it needs a TLC (Target Language Compiler) file, so Matlab knows how to compile the code. However, documentation on how to create a TLC file is very sparse and examples are limited. Therefore the block was changed to a `Matlab Function' block. Matlab can compile these blocks without any extra files, which eliminated the need to write a TLC file.
 
-
-
-\subsubsection{Changing the UDP Block}
-Upon compiling the model for use on the SpeedGoat an issue was detected. The block needed two DLL files to function that were not present on the SpeedGoat. It was not possible to copy those files to the correct location.
+\subsubsection{Changing the UDP Blocks}
+The second issue was the UDP library that was being used. The library needed two DLL files to function, those were not present on the SpeedGoat. It was not possible to copy those files to the correct location.
 
 So instead the blocks from the Real-time UDP library were used. These blocks do not need any extra files and can therefore run on the SpeedGoat without any issues. Another advantage of using this library is that it allows configuration of which PCI Bus to use. Since the SpeedGoat has multiple LAN-ports, configuring this will make sure the data will be send to the correct port.
 
-The new version of the library can be found in figure \ref{fig:finalmonsys}. The old implementation of the 'UDP Packet' subsystem is also provided, in case the user wants to test a model on his computer instead of the SpeedGoat. The 'UDP Packet' subsystem that was created for the SpeedGoat can be found in figure \ref{fig:finaludpsys}.
+The new version of the library can be found in figure \ref{fig:finalmonsys}. The old implementation of the `UDP Packet' subsystem is also provided, in case the user wants to test a model on his computer instead of the SpeedGoat. The `UDP Packet' subsystem that was created for the SpeedGoat can be found in figure \ref{fig:finaludpsys}.
 
 \begin{figure}[H]
 	\centering
