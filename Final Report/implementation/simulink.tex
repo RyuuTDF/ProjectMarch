@@ -63,14 +63,46 @@ When the first implementation was completed, the exoskeleton was not completely 
 \subsection{Final Implementation}\label{sec:simfinim}
 As stated in the previous section, when the first version of the library was ready, the team had to wait before it could be tested in practice. In this section the changes to the first implementation will be described, that made sure the library worked with the hardware of the exoskeleton.
 
+\subsubsection{Changing the Function Block}
+
+
+
 \subsubsection{Changing the UDP Block}
-Upon compiling the model for use on the SpeedGoat an issue was detected. The block needed two DLL files to function that were not present on the SpeedGoat and it was not possible to copy those files to the correct location.
+Upon compiling the model for use on the SpeedGoat an issue was detected. The block needed two DLL files to function that were not present on the SpeedGoat. It was not possible to copy those files to the correct location.
 
 So instead the blocks from the Real-time UDP library were used. These blocks do not need any extra files and can therefore run on the SpeedGoat without any issues. Another advantage of using this library is that it allows configuration of which PCI Bus to use. Since the SpeedGoat has multiple LAN-ports, configuring this will make sure the data will be send to the correct port.
+
+The new version of the library can be found in figure \ref{fig:finalmonsys}. The old implementation of the 'UDP Packet' subsystem is also provided, in case the user wants to test a model on his computer instead of the SpeedGoat. The 'UDP Packet' subsystem that was created for the SpeedGoat can be found in figure \ref{fig:finaludpsys}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.9\textwidth]{implementation/libraryfinal}
+	\caption{Final implementation of the Monitoring System Library} 
+	\label{fig:finalmonsys}
+\end{figure}
 
 \subsubsection{Data \& Packet Limit}
 However, the Real-time UDP block also had some disadvantages. It does not support IP Fragmentation. This means the size of the package payload (the data in a package) is limited to the MTU (Maximum Transmission Unit) of an Ethernet frame. The total payload can be 1472 bytes \cite{web:RealTimeUdp}. This caused a big issue with the implementation as the simulated stress test showed the payload could be up to 8 kilobytes if the model had 50 signals.
 
-To make the footprint of a signal smaller, there were drastic changes made to the properties of the signals. In the new implementation the model only contains an ID for a signal next to its value. The other properties have been moved to the client side and are matched based on the ID. Because a serialized signal only stores two doubles, it now has a length of only 18 bytes. If we divide the maximum payload by this length, it shows the system can now support up to 80 signals.
+To make the footprint of a signal smaller, there were drastic changes made to the properties of the signals. In the new implementation the model only contains an ID for a signal next to its value. The other properties have been moved to the client side and are matched based on the ID. The new pop-up for a signal block can be found in figure \ref{fig:finalpopup}. Because a serialized signal only stores two doubles, it now has a length of only 18 bytes. If we divide the maximum payload by this length, it shows the system can now support up to 80 signals.
    
 Of course these changes had consequences for the GUI. The impact of this will be described in section REF TO GUI.
+
+\begin{figure}[H]
+	\centering
+	\begin{minipage}{.49\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{implementation/popupfinal}
+		\subcaption{Signal Block Pop-up}
+		\label{fig:finalpopup}
+	\end{minipage}
+	\rulesep
+	\begin{minipage}{.49\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{implementation/UDPPacketfinal3}
+		\subcaption{UDP Packet Subsystem, SpeedGoat version}
+		\label{fig:finaludpsys}
+	\end{minipage}
+	\caption{Final version of the blocks}
+	\label{fig:finalimplementation}
+\end{figure}
