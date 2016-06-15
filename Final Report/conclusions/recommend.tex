@@ -1,6 +1,5 @@
 \chapter{Recommendations}
 
-
 \section{3D-Model}
 In the original description of the project, creating a 3D-Model of the MARCH based on the sensor data was one of the main requirements of the system. However, after research it turned out that the system which was previously used to send the wireless data did not work, this requirement was pushed back in order to create a working data transfer system.  
 
@@ -24,6 +23,7 @@ The GUI can easily be expanding with more elements, these include but are certai
 	\item Showing the mean, deviation and other statistical information about the values of a sensor
 \end{itemize}
 
-%GG Java engine ombouwen
+\section{Recording Feedback}
+The recording toggle in the GUI is currently based on use on one computer at a time. It does not account for multiple GUIs being active at the same time or a crashing GUI. The recording state is being send in the footer of every packet, however it is not being used yet. An extension of the functionality would be to set the recording toggle accordingly to the status in the footer.
 
-%HH Check op dubbele IDs
+%GG Java engine ombouwen
