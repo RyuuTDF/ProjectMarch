@@ -1,19 +1,18 @@
 \chapter{Infosheet}
 \pagebreak
 \begin{small}
-\subsubsection{General Information}
 {\bfseries Project Title:} Exoskeleton Monitoring System\\
 {\bfseries Client Organisation:} Project March\\
 {\bfseries Presentation Date:} 24 June 2016
 
 \subsubsection{Description}
-The goal of Project MARCH is designing and building an exoskeleton for paraplegic people and participate with it in the 2016 Cybathlon in Zürich. The exoskeleton has many sensors, which acquire data from their surroundings. Project MARCH wanted to have a system, which allows for wireless external monitoring of the exoskeleton. 
+The goal of Project MARCH is designing and building an exoskeleton for paraplegic people and participate with it in the 2016 Cybathlon in Zürich. The exoskeleton has many sensors, which acquire data from their surroundings. Project MARCH required a system, which allows for wireless external monitoring of the exoskeleton. 
 
-During the research phase, we analysed the various limitations of the situation and searched for an implementation that avoided those. We encountered a couple of challenges during the project, the biggest one for each subsystem were Simulink's limitation on code generation, wireless packet loss and the high update rate that caused issues with some of Matlab's GUI elements.  
+During the research phase, we ran into various limitations of the software \& hardware and we searched for ways to avoid them. The biggest challenge for each subsystem were Simulink's limitation on code generation, wireless packet loss and the high update rate that caused issues with some of Matlab's GUI elements.  
 
-As the client was building an exoskeleton that had to meet several rules, the base on which we were building was robust. Therefore the requirements did not change during the implementation phase. The implementation could be split up in three parts, so each team member was responsible for one subsystem. We choose Scrum as our methodology to still allow flexibility if something came up.
+As the client was building an exoskeleton that had to meet the rules set by the Cybathlon, the requirements could be clearly defined and did not change during the course of the project. We ordered their priority using the MoSCoW method. The implementation could be split up in three parts, so each team member was responsible for one subsystem. We choose Scrum as our methodology to still allow flexibility if something came up.
 
-The product created exists of three parts: a Simulink library, software that runs on a Raspberry Pi and a Matlab GUI. We tested them using manual tests. We managed to implement all the requirements that were not labeled 'Would have'. 
+The product created exists of three parts: a Simulink library, software that runs on a Raspberry Pi and a Matlab GUI. We tested them using manual tests. We managed to implement all the requirements that were labeled with a higher priority than 'Would have'. 
 
 We implemented all the core features the client wanted, however it is certainly possible to extend the GUI with more features that would enhance the system.
 
