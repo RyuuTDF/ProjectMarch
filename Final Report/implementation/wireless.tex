@@ -32,7 +32,14 @@ To gather metrics on the performance of the network setup, two programs were wri
 
 With this two programs, the issues with packet loss on the wireless connection were detected. Accompanied by Wireshark they provided a way to measure the network performance and measure the effects of improvements made to the other software parts.
 
-%TODO: Maybe add some statistics in here if enough time for that :)
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{images/overview.png}
+	\caption{Network performance comparison of implemented bridging variations}
+	\label{fig:networkperformance}
+\end{figure}
+
+In the figure above, the networking performance of the three built implementations are compared. Although this graph might imply that the original python variant should be chosen, it would end up as a bad choise in practice. In these tests the variants with compression are forced to compress almost incompressable data, while in practice the performance is better. On top of that, a compression rate of 50\% or better is realistic. Translated to practice, this will mean that the performance in the complete input range between 13 and 2800 for the C-program will lie between range of 13 and 1400 on this graph, outperforming both implementations in Python. Another important side-note is that although the implementation in Python seems to excel when processing very large packages, it will cause a crash of the network stack on the Raspberry Pi within a minute.
 
 \subsection{Data recorder}
 
