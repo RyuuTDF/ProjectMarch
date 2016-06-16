@@ -1,7 +1,8 @@
 \section{User Interface}
 The implementation of the User Interface is described in this section. Since the GUI has been developed iteratively, each subsection describes the progress gained in the corresponding sprint. In addition, section \ref{sec:GuiTest} discusses the method used for testing the interface.
 \subsection{Second Sprint}
-In this sprint, the first iteration of the user interface was developed, first a character user interface as described in section \ref{sec:CUI} and following a graphical user interface as described in section \ref{sec:GUIS1}. The limitations found while developing the interface are discussed in section \ref{sec:LimS1}.
+
+In this sprint, the first iteration of the user interface was developed, first a character user interface as described in the  \hyperref[sec:CUI]{\textit{Character User Interface}} section and following a graphical user interface as described in the \hyperref[sec:GUIS1]{\textit{Graphical User Interface}} section. The issues found while developing the interface are discussed in the \hyperref[sec:LimS1]{\textit{Limitations}} section.
 \subsubsection{Character User Interface}
 \label{sec:CUI}
 The first iteration for the user interface was a simple CUI (Character User Interface) which directly shows the data which is gathered from the sensors and sent through the wireless connection. Because of the fact that Matlab, the chosen framework for user interface, contains an inherent CUI, there was no need to create a custom CUI. Because of this, the implementation of the CUI consisted of creating a receiver for the sensor data and transforming this data in a readable format as can be seen in figure \ref{fig:CUIV1}. 
@@ -21,7 +22,7 @@ The table of important sensors is intended to show more details about the select
 \subsubsection{Limitations}
 \label{sec:LimS1}
 The Matlab UITable class, which was used to show the data, has the disadvantage that the entire table has to be redrawn if something changes, even if only one cell changes. Since redrawing an entire table takes about $0.05$ seconds, 
-doing this every update is not a possibility with an update rate of 50 Hz. Of course, having such an high update rate would make the table completely unreadable, since the data changes before one has even time to read it. In addition, in order to remove unnecessary redrawing, the static and dynamic parts of the tables are split where possible. Another problem introduced by the high refresh rate is that callback functions which are triggered by editing table cells do not function correctly. Because of the high update rate, the table is redrawn before the callback function has finished which gives unintended results. This problem has been solved by moving all cell with an edit callback to a table with a low refresh rate. 
+doing this every update is not a possibility with an update rate of 50 Hz. Of course, having such an high update rate would make the table completely unreadable, since the data changes before one has even time to read it. In addition, in order to remove unnecessary redrawing, the static and dynamic parts of the tables are split where possible. Another problem introduced by the high refresh rate is that callback functions which are triggered by editing table cells do not function correctly. Because of the high update rate, the table is redrawn before the callback function has finished which gives unintended results. This problem has been solved by moving all cells with an edit callback to a table with a low refresh rate. 
 
 \begin{figure}[H]
 	\centering
@@ -31,7 +32,7 @@ doing this every update is not a possibility with an update rate of 50 Hz. Of co
 \end{figure} 
 
 \subsection{Third Sprint}
-In this sprint the graphical user interface was refined. The implementation of more visualisation functionality is discussed in section \ref{sec:VisS3}. The implementation of additional control tools in the interface is discussed in section \ref{sec:ConS3}. The limitations found in the implementation of this sprint is found in section \ref{sec:LimS3}.
+In this sprint the graphical user interface was refined. The implementation of more visualisation functionality is discussed in the \hyperref[sec:VisS3]{\textit{Visualisation}} section. The implementation of additional control tools in the interface is discussed in the \hyperref[sec:ConS3]{\textit{Control}} section. The limitations found in the implementation of this sprint is found in the \hyperref[sec:LimS3]{\textit{Limitations}} section .
 \subsubsection{Visualisation}
 \label{sec:VisS3}
 For each sensor has an minimum and maximum safe value. When a value is not between these values, the sensor is marked red so it is immediately clear that there is something wrong. When a sensor is selected, one can see its minimum and maximum values. It is also possible to add multiple sensors to a graph in order to easily compare their values. It should be noted that the graphed data is not normalised, so visualising sensors with widely different data ranges is not advised.  
@@ -54,7 +55,7 @@ Showing which sensors have exceeded their minimum or maximum values is one of th
 \end{figure} 
 
 \subsection{Fourth Sprint}
-In this sprint the graphical user interface was finished. The performance issues and the solution for them is discussed in section \ref{sec:PerfS4}. The last additions to the interface are discussed in section \ref{sec:GUIS4}. 
+In this sprint the graphical user interface was finished. The performance issues and the solution for them is discussed in the \hyperref[sec:PerfS4]{\textit{Performance}} section . The last additions to the interface are discussed in the \hyperref[sec:GUIS4]{\textit{Interface}} section. 
 
 \subsubsection{Performance}
 \label{sec:PerfS4}
