@@ -65,7 +65,7 @@ When testing for performance, the Matlab profiler showed that the function used 
 Now that it is possible to have an update rate for the GUI which is higher than the update rate of the data packages, the GUI needs to be able to deal with an empty queue of packets. In earlier iterations of the system, this was done by repeating the latest data in the update function. However, this makes it seem that there is new data when there is none. This has been changed in a wait-loop which waits if there is no packet in the queue and otherwise runs the regular update flow as can be seen in figure \ref{fig:UpdateFlow}. 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=.75\textwidth]{images/UpdateFlow}
+	\includegraphics[width=.6\textwidth, height=0.5\textheight]{images/UpdateFlow}
 	\caption{Diagram which shows how the update flow is structured} 
 	\label{fig:UpdateFlow}
 \end{figure} 
