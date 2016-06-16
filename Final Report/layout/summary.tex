@@ -5,16 +5,11 @@ Project MARCH is designing and building an exoskeleton for paraplegic people in 
 %BB Wat wij voo MARCH moeten fixxen
 The exoskeleton has many sensors, which acquire data from their surroundings. Project MARCH required a system, which allows for wireless external monitoring of the exoskeleton. \\
 %CC Research
-During the research phase, the network infrastructure of the exoskeleton was explored in order to choose the best way to implement the wireless connection as well as how to properly integrate the wireless system with the Simulink module which handles all the sensors. In this phase, it was concluded that the system basically had three subsystems: the actual wireless network, the connection from the sensors to the wireless network and the user interface.//
-
+During the research phase, the network infrastructure of the exoskeleton was explored in order to choose the best way to implement the wireless connection as well as how to properly integrate the wireless system with the Simulink module which handles all the sensors. In this phase, it was concluded that the system basically had three subsystems: the actual wireless network, the connection from the sensors to the wireless network and the user interface.\\
 During implementation, it was discovered that Simulink had more limitations compared to Matlab than initially thought, this resulted in some rework of the network infrastructure in combination with the fact that there was an unacceptable rate of packet loss. The user interface initially had an update rate which could not keep up with the amount of received packets. It turned out that this problem was caused by the fact that the chosen rendering function had a lot of unnecessary overhead and was solved by replacing those functions with more efficient ones.\\
-
-As the client was building an exoskeleton that had to meet several rules, the base on which we were building was robust. Therefore the requirements did not change during the implementation phase. The implementation could be split up in three parts, so each team member was responsible for one subsystem. Scrum was chosen as our methodology to still allow flexibility if something came up.
-
-The product created exists of three parts: a Simulink library, software that runs on a Raspberry Pi and a Matlab GUI. We tested them using manual tests. We managed to implement all the requirements that were not labeled 'Would have'. 
-
-We implemented all the core features the client wanted, however it is certainly possible to extend the GUI with more features that would enhance the system.	
-
+As the client was building an exoskeleton that had to meet several rules, the base on which we were building was robust. Therefore the requirements did not change during the implementation phase. Since implementation could be split up in three parts, it was decided that each team member was responsible for one subsystem. Scrum was chosen as our methodology to still allow flexibility if something came up.\\
+The product created exists of three parts: a Simulink library, software that runs on a Raspberry Pi and a Matlab GUI. 
+All the core features the client wanted were implemented in the product, however it is certainly possible to extend the GUI with more features that would enhance the system.
 
 
 %DD Implementation
