@@ -104,5 +104,5 @@ To make the footprint of a signal smaller, there were drastic changes made to th
 	\label{fig:finalimplementation}
 \end{figure}
 
-\section{Testing}
+\subsection{Testing}
 Testing of the library was done by exploratory testing. First of all Simulink is very strict on compiling, if there is an issue in a block or code it will not compile. Secondly the code we used for serializing was adapted (see section \ref{sec:simfirim})  and therefore already tested. Finally a test model was created that used five Random Number Generators as a substitution for EtherCAT. Next to each generator a `Display' block was placed to show what number was generated. By setting the sample time to 5 seconds, it was possible to manually check if the GUI was receiving the correct data from the test model.
