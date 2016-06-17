@@ -12,12 +12,8 @@ An encoder is a device that measures the angular position or motion of a shaft o
 The six range finders are situated on the two shanks and are for range feedback. While the proximity sensors are used to prevent the feet from hitting small close objects, the range finders are used on a larger scale to get sense of the environment. They work by using echolocation.
 \subsubsection{Force/torque sensors}
 The four force/torque sensors are situated on the bottom of the feet. The sensors are based on an array of multiple regular 3-axis sensors. By knowing in which way each sensor deforms, the torque acting on the whole sensor can be calculated. These sensors provide 6 degrees of freedom force and torque measurement.
-\subsection{EtherCAT}\label{sec:etherCat}
-EtherCAT is an Ethernet-based system for automation applications that require short data update times with low communication jitter and reduced hardware costs. In MARCH, it is used to connect different parts of the system with each other. The relevant part for this project is the EtherCAT connection between the sensors and the central computer, as the sensor data gets send to the central computer. This central computer is also knows as `Speedgoat', and will be referred to as such.
-\subsection{Simulink} 
-Simulink is a block diagram environment in Matlab that can be used for multi-domain simulation. The EtherCAT configuration that MARCH uses is loaded into Simulink. This allows the system to exchange data between parts more easily. 
 
-\begin{table}
+\begin{table}[h]
 	\centering
 	\begin{tabular}{|l|c|c|c|c|c|c|c|}
 		\hline
@@ -38,6 +34,10 @@ Simulink is a block diagram environment in Matlab that can be used for multi-dom
 	\label{tab:sensor}
 \end{table}
 
+\subsection{EtherCAT}\label{sec:etherCat}
+EtherCAT is an Ethernet-based system for automation applications that require short data update times with low communication jitter and reduced hardware costs. In MARCH, it is used to connect different parts of the system with each other. The relevant part for this project is the EtherCAT connection between the sensors and the central computer, as the sensor data gets send to the central computer. This central computer is also knows as `Speedgoat', and will be referred to as such.
+\subsection{Simulink} 
+Simulink is a block diagram environment in Matlab that can be used for multi-domain simulation. The EtherCAT configuration that MARCH uses is loaded into Simulink. This allows the system to exchange data between parts more easily. 
 
 
 
