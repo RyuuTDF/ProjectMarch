@@ -36,7 +36,7 @@ doing this every update is not a possibility with an update rate of 50 Hz. Of co
 In this sprint the graphical user interface was refined. The implementation of more visualisation functionality is discussed in the \hyperref[sec:VisS3]{\textit{Visualisation}} section. The implementation of additional control tools in the interface is discussed in the \hyperref[sec:ConS3]{\textit{Control}} section. The limitations found in the implementation of this sprint is found in the \hyperref[sec:LimS3]{\textit{Limitations}} section .
 \subsubsection{Visualisation}
 \label{sec:VisS3}
-For each sensor has an minimum and maximum safe value. When a value is not between these values, the sensor is marked red so it is immediately clear that there is something wrong. When a sensor is selected, one can see its minimum and maximum values. It is also possible to add multiple sensors to a graph in order to easily compare their values. It should be noted that the graphed data is not normalised, so visualising sensors with widely different data ranges is not advised.  
+Each sensor has a minimum and maximum value for the output signal, exceedance of these values is a sign that something is wrong in the MARCH . When a value is not between these values, the sensor is marked red so it is immediately clear that there is something wrong. When a sensor is selected, one can see its minimum and maximum values. It is also possible to add multiple sensors to a graph in order to easily compare their values. It should be noted that the graphed data is not normalised, so visualising sensors with widely different data ranges is not advised.  
 
 \subsubsection{Control}
 \label{sec:ConS3}
