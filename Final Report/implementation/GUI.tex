@@ -22,8 +22,7 @@ The table of important sensors is intended to show more details about the select
 
 \subsubsection{Limitations}
 \label{sec:LimS1}
-The Matlab UITable class, which was used to show the data, has the disadvantage that the entire table has to be redrawn if something changes, even if only one cell changes. Since redrawing an entire table takes about $0.05$ seconds, 
-doing this every update is not a possibility with an update rate of 50 Hz. Of course, having such an high update rate would make the table completely unreadable, since the data changes before one has even time to read it. In addition, in order to remove unnecessary redrawing, the static and dynamic parts of the tables are split where possible. Another problem introduced by the high refresh rate is that callback functions which are triggered by editing table cells do not function correctly. Because of the high update rate, the table is redrawn before the callback function has finished which gives unintended results. This problem has been solved by moving all cells with an edit callback to a table with a low refresh rate. 
+The Matlab UITable class, which was used to show the data, has the disadvantage that the entire table has to be redrawn if something changes, even if only one cell changes. Since redrawing an entire table takes about $0.05$ seconds, doing this every update is not a possibility with an update rate of 50 Hz. Of course, having such an high update rate would make the table completely unreadable, since the data changes before one has even time to read it. In addition, in order to remove unnecessary redrawing, the static and dynamic parts of the tables are split where possible. Another problem introduced by the high refresh rate is that callback functions which are triggered by editing table cells do not function correctly. Because of the high update rate, the table is redrawn before the callback function has finished which gives unintended results. This problem has been solved by moving all cells with an edit callback to a table with a low refresh rate. 
 
 \begin{figure}[H]
 	\centering
@@ -60,12 +59,12 @@ In this sprint the graphical user interface was finished. The performance issues
 
 \subsubsection{Performance}
 \label{sec:PerfS4}
-When testing for performance, the Matlab profiler showed that the function used to plot the graphs took a lot of time. It turned out that the functions used to plot and clear the graphs have more functionality than just plotting a line and therefore have 	unnecessary overhead. In order to solve this problem, instead of using a plot function, a line object is created for each graph. If the line object is updated, only the line is redrawn instead of the entire graph. This resulted in a huge performance boost which increased the best case update rate from 20 Hz to 100 Hz.\\
+When testing for performance, the Matlab profiler showed that the function used to plot the graphs took a lot of time. It turned out that the functions used to plot and clear the graphs have more functionality than just plotting a line and therefore have 	unnecessary overhead. In order to solve this problem, instead of using a plot function, a line object is created for each graph. If the line object is updated, only the line is redrawn instead of the entire graph. This resulted in a huge performance boost which increased the best case update rate from 20 Hz to 100 Hz.
 
 Now that it is possible to have an update rate for the GUI which is higher than the update rate of the data packages, the GUI needs to be able to deal with an empty queue of packets. In earlier iterations of the system, this was done by repeating the latest data in the update function. However, this makes it seem that there is new data when there is none. This has been changed in a wait-loop which waits if there is no packet in the queue and otherwise runs the regular update flow as can be seen in figure \ref{fig:UpdateFlow}. 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=.6\textwidth, height=0.5\textheight]{images/UpdateFlow}
+	\includegraphics[height=0.45\textheight]{images/UpdateFlow}
 	\caption{Diagram which shows how the update flow is structured} 
 	\label{fig:UpdateFlow}
 \end{figure} 
