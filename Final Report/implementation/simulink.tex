@@ -82,9 +82,9 @@ The new version of the library can be found in figure \ref{fig:finalmonsys}. The
 \end{figure}
 
 \subsubsection{Data \& Packet Limit}
-However, the Real-time UDP block also had some disadvantages. It does not support IP Fragmentation. This means the size of the package payload (the data in a package) is limited to the MTU (Maximum Transmission Unit) of an Ethernet frame. The total payload can be 1472 bytes \cite{web:RealTimeUdp}. This caused a big issue with the implementation as the simulated stress test showed the payload could be up to 8 kilobytes if the model had 50 signals.
+However, the Real-time UDP block also had some disadvantages. It does not support IP Fragmentation. This means the size of the package payload (the data in a package) is limited to the MTU (Maximum Transmission Unit) of an Ethernet frame. The total payload can be 1472 bytes \cite{web:RealTimeUdp}. This caused a big issue with the implementation as the simulated stress test showed the payload could be up to eight kilobytes if the model had fifty signals.
 
-To make the footprint of a signal smaller, there were drastic changes made to the properties of the signals. In the new implementation the model only contains an ID for a signal next to its value. The other properties have been moved to the client side and are matched based on the ID. The new pop-up for a signal block can be found in figure \ref{fig:finalpopup}. Because a serialized signal only stores two doubles, it now has a length of only 18 bytes. If we divide the maximum payload by this length, it shows the system can now support up to 80 signals.
+To make the footprint of a signal smaller, there were drastic changes made to the properties of the signals. In the new implementation the model only contains an ID for a signal next to its value. The other properties have been moved to the client side and are matched based on the ID. The new pop-up for a signal block can be found in figure \ref{fig:finalpopup}. Because a serialized signal only stores two doubles, it now has a length of only 18 bytes. If we divide the maximum payload by this length, it shows the system can now support up to eighty signals.
 
 \begin{figure}[H]
 	\centering
@@ -106,4 +106,4 @@ To make the footprint of a signal smaller, there were drastic changes made to th
 \end{figure}
 
 \subsection{Testing}
-Testing of the library was done by exploratory testing. First of all Simulink is very strict on compiling, if there is an issue in a block or code it will not compile. Secondly the code we used for serializing was adapted (see section \ref{sec:simfirim})  and therefore already tested. Finally a test model was created that used five Random Number Generators as a substitution for EtherCAT. Next to each generator a `Display' block was placed to show what number was generated. By setting the sample time to 5 seconds, it was possible to manually check if the GUI was receiving the correct data from the test model.
+Testing of the library was done by exploratory testing. First of all Simulink is very strict on compiling, if there is an issue in a block or code it will not compile. Secondly the code we used for serializing was adapted (see section \ref{sec:simfirim})  and therefore already tested. Finally a test model was created that used five Random Number Generators as a substitution for EtherCAT. Next to each generator a `Display' block was placed to show what number was generated. By setting the sample time to five seconds, it was possible to manually check if the GUI was receiving the correct data from the test model.
