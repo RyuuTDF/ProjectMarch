@@ -1,7 +1,7 @@
 \section{Simulink}\label{sec:simulink}
 
 \subsection{Program Limitations}\label{sec:simprolim}
-Simulink is an block diagram environment integrated in Matlab, but can be compiled for standalone usage. Since it is integrated in Matlab, Simulink has blocks that support Matlab-code. However there are things that can be done in Matlab, but not in a standalone-compiled Simulink-model. This meant the team ran into a lot of limitations during the first two weeks of coding. In the following sections the limitations the team ran into will be discussed and described how they impacted the implementation.
+Simulink is a block diagram environment integrated in Matlab, but can also be compiled for standalone usage. Since it is integrated in Matlab, Simulink has blocks that support Matlab-code. However there are things that can be done in Matlab, but not in a standalone-compiled Simulink-model. This meant the team ran into a lot of limitations during the first two weeks of coding. In the following sections the limitations the team ran into will be discussed and described how they impacted the implementation.
 
 \subsubsection{Cell Arrays}
 Simulink is signal-based, the only data-types supported between the blocks are integers and floating points. The original idea had a Cell Array being created to be used as State Table, as that array type supports numbers as well as character arrays (strings). However, as a Cell Array can contain character arrays, they can not be used to send data between blocks in Simulink. Furthermore, the Cell Array-class has only limited support for code generation and the generation does not support variable sized Cell Arrays. This meant they could not be used in the code.
@@ -17,7 +17,7 @@ With the Cell Array not implementable, the team looked to see whether the serial
 Using the arguments above, this alternative was deemed as not recommended. Even though the blocks could be used to transfer the data, a lot of memory would be wasted.
 
 \subsubsection{SQL}
-Since Data Store Memory blocks were not recommended, the next alternative was to see if a SQL database could be used. To store the Simulink model, the Speedgoat uses an SSD. The SSD would be big enough to store such a database on. The state table would be part of the database and each signal block could write its data to it. However, the Database Class does not support code generation at all, therefore this alternative was deemed implementable.
+Since Data Store Memory blocks were not recommended, the next alternative was to see if a SQL database could be used. To store the Simulink model, the Speedgoat uses an SSD. The SSD would be big enough to store such a database on. The state table would be part of the database and each signal block could write its data to it. However, the Database Class does not support code generation at all, therefore this alternative was deemed not implementable.
 
 \subsection{First Implementation}\label{sec:simfirim}
 With the problems described in \ref{sec:simprolim} in mind, the team eventually found a working solution. In this section this implementation will be described. The implementation was done during the second and third sprint. The visual representation of the implemented library can be found in figure \ref{fig:firstmonsys}. The blocks in this library can be copied over to the exoskeleton model.
